@@ -19,8 +19,9 @@ var sortByFrequencyTuple = new WordFinder(new string[] { "abug", "nupo", "tguo",
     "bug",
     "up",
     "ants",
+    "go",
     "good",
-    "upon"
+    "upon",
 });
 
 i = 1;
