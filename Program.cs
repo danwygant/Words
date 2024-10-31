@@ -26,5 +26,5 @@ var sortByFrequencyTuple = new WordFinder(new string[] { "abug", "nupo", "tguo",
 i = 1;
 foreach (var item in sortByFrequencyTuple)
 {
-    Console.WriteLine("{0} {1} - {2} times", i++, item.Item1, item.Item2);
+    Console.WriteLine("{0} {1} count: {2}", i++, item.Item1, item.Item2);
 }
