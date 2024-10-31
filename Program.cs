@@ -9,7 +9,8 @@ var sortByFrequency = new WordFinder(new string[] { "abug","nupo","tguo","sopd" 
     "upon"
 });
 
+int i = 1;
 foreach (var item in sortByFrequency)
 {
-    Console.WriteLine(item);
+    Console.WriteLine("{0} {1}", i++, item);
 }
