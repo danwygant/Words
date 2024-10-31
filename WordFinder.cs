@@ -25,6 +25,26 @@ public class WordFinder : IWordFinder
 
     public IEnumerable<string> Find(IEnumerable<string> wordstream)
     {
+        Dictionary<string, int> wordFrequency = DoSearchForWords(wordstream);
+
+        // Sort by frequency and return top 10 most repeated words
+        return wordFrequency.OrderByDescending(x => x.Value).Take(10).Select(x => x.Key);
+    }
+
+    public IEnumerable<Tuple<string,int>> FindTuple(IEnumerable<string> wordstream)
+    {
+        Dictionary<string, int> wordFrequency = DoSearchForWords(wordstream);
+
+        // Sort by frequency and return top 10 most repeated words
+        //return wordFrequency.OrderByDescending(x => x.Value).Take(10).Select(x => x.Key);
+        // Convert the dictionary to a list of tuples
+        var r = wordFrequency.OrderByDescending(x => x.Value).Take(10)
+                            .Select(kvp => Tuple.Create(kvp.Key, kvp.Value));
+        return r;
+    }
+
+    private Dictionary<string, int> DoSearchForWords(IEnumerable<string> wordstream)
+    {
         var wordFrequency = new Dictionary<string, int>();
 
         foreach (var word in wordstream.Distinct())
@@ -34,12 +54,11 @@ public class WordFinder : IWordFinder
             {
                 // GetValueOrDefault retrieves the value with just one dictionary access/more readable
                 // 2 accesses for: wordFrequency[word]=wordFrequency.Keys.Contains(word)?wordFrequency[word]++:1;
-                wordFrequency[word] = wordFrequency.GetValueOrDefault(word, 0) + 1;
+                wordFrequency[word] = wordFrequency.GetValueOrDefault(word, 0) + count;
             }
         }
 
-        // Sort by frequency and return top 10 most repeated words
-        return wordFrequency.OrderByDescending(x => x.Value).Take(10).Select(x => x.Key);
+        return wordFrequency;
     }
 
     private int SearchWordInMatrix(string word)
