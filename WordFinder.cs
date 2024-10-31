@@ -4,11 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public interface IWordFinder
-{
-    IEnumerable<string> Find(IEnumerable<string> wordstream);
-}
-
 public class WordFinder : IWordFinder
 {
     private readonly IEnumerable<string> _matrix;
